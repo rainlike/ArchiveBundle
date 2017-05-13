@@ -1,0 +1,4 @@
+services:
+#    rainlike_archive.example:
+#        class: Rainlike\ArchiveBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
