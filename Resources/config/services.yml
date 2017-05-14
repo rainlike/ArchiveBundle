@@ -1,4 +1,24 @@
 services:
-#    rainlike_archive.example:
-#        class: Rainlike\ArchiveBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    rainlike.archivator:
+        class: Rainlike\BreadcrumbsBundle\Service\BreadcrumbsBuilder
+
+    rainlike.breadcrumbs.processor:
+        class: Rainlike\BreadcrumbsBundle\Service\BreadcrumbsProcessor
+        arguments:
+            - "@router"
+            - "@templating"
+            - "@rainlike.breadcrumbs.helper"
+
+    rainlike.breadcrumbs.helper:
+        class: Rainlike\BreadcrumbsBundle\Helper\BreadcrumbsHelper
+        arguments:
+            - "@translator.default"
+            - "@kernel"
+
+    rainlike.breadcrumbs.extension:
+        class: Rainlike\BreadcrumbsBundle\Twig\BreadcrumbsExtension
+        arguments:
+            - "@rainlike.breadcrumbs"
+            - "@rainlike.breadcrumbs.processor"
+        tags:
+            - { name: twig.extension }
